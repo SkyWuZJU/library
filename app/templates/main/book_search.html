@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <table class="table">
+        <form action="" method="post" class="form" enctype="multipart/form-data" role="form" style="font-family: 幼圆;font-size: 200%">
+            <thead>
+            <tr>
+                {{ form.hidden_tag() }}
+                <th>{{ wtf.form_field(form.id) }}</th>
+                <th>{{ wtf.form_field(form.name) }}</th>
+                <th>{{ wtf.form_field(form.category_id) }}</th>
+                <th>{{ wtf.form_field(form.press) }}</th>
+                <th>{{ wtf.form_field(form.yearmin) }}{{ wtf.form_field(form.yearmax) }}</th>
+                <th>{{ wtf.form_field(form.author) }}</th>
+                <th>{{ wtf.form_field(form.pricemin) }}{{ wtf.form_field(form.pricemax) }}</th>
+                <th>总藏书量</th>
+                <th>库存</th>
+                <th>查看</th>
+                <th>{{ wtf.form_field(form.submit) }}</th>
+            </tr>
+            </thead>
+        </form>
+        {% if booklist %}
+        {% for book in booklist %}
+            <tbody>
+            <tr>
+                <th>{{ book.id }}</th>
+                <th>{{ book.title }}</th>
+                <th>{{ book.category.name }}</th>
+                <th>{{ book.press }}</th>
+                <th>{{ book.year }}</th>
+                <th>{{ book.author }}</th>
+                <th>{{ book.price }}</th>
+                <th>{{ book.total }}</th>
+                <th>{{ book.stock }}</th>
+                <th><a href="{{ url_for('main.book_show' , id=book.id) }}">查看</a></th>
+            </tr>
+            </tbody>
+        {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}

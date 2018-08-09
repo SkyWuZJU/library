@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+<div class="page-header">
+    <strong style="font-size: 50px">{{ book.title }}</strong>
+            <hr>
+            <p>{{ book.category.name }}</p>
+    库存{{ book.stock }}
+    <br>
+    <a href="{{ url_for('admin.Borrow' , id=book.id) }}">借阅</a>
+    <br/>
+</div>
+
+
+{% endblock %}

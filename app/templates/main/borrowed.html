@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>书名</th>
+            <th>类别</th>
+            <th>出版社</th>
+            <th>年份</th>
+            <th>作者</th>
+            <th>价格</th>
+            <th>总藏书量</th>
+            <th>库存</th>
+            <th>查看</th>
+        </tr>
+        </thead>
+        {% if booklist %}
+        {% for record in booklist %}
+            <tbody>
+            <tr>
+                <th>{{ record.book.bno }}</th>
+                <th>{{ record.book.title }}</th>
+                <th>{{ record.book.category.name }}</th>
+                <th>{{ record.book.press }}</th>
+                <th>{{ record.book.year }}</th>
+                <th>{{ record.book.author }}</th>
+                <th>{{ record.book.price }}</th>
+                <th>{{ record.book.total }}</th>
+                <th>{{ record.book.stock }}</th>
+                <th><a href="{{ url_for('main.book_show' , id=record.book.id) }}">查看</a></th>
+            </tr>
+            </tbody>
+        {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}

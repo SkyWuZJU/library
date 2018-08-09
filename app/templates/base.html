@@ -1,0 +1,77 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}图书管理系统{% endblock %}
+
+{% block head %}
+<meta name="baidu_union_verify" content="ebe8ca5468cdfb748c3394aff294445e">
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{{ moment.include_moment() }}
+    <style type="text/css">
+		.scrollspy-example {
+			height: 900px;
+			overflow: auto;
+			position: relative;
+		}
+        body {
+            padding-top: 70px;
+        }
+
+	</style>
+{% endblock %}
+
+
+{% block navbar %}
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">图书馆管理系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+			</ul>
+            <ul class="nav navbar-nav navbar-right">
+    			<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					  {% if current_user.is_authenticated %}
+					  	<li><a href="{{ url_for('admin.book') }}">图书入库</a></li>
+                      <li><a href="{{ url_for('admin.record') }}">借书记录</a></li>
+                      <li><a href="{{ url_for('admin.borrow') }}">借书</a></li>
+					  	<li><a href="{{ url_for('admin.category') }}">图书分类</a></li>
+					  {% endif %}
+                      <li><a href="{{ url_for('main.book_search') }}">查书</a></li>
+                      <li><a href="{{ url_for('main.card_create') }}">借书证开卡</a></li>
+                      <li><a href="{{ url_for('main.cardsearch') }}">借书证查卡</a></li>
+                      <li><a href="{{ url_for('main.back') }}">还书</a></li>
+					<li role="separator" class="divider"></li>
+					  {% if current_user.is_authenticated %}
+                      <li><a href="{{ url_for('admin.logout') }}">用户登出</a></li>
+                      {% else %}
+                      <li><a href="{{ url_for('admin.login') }}">管理员注册/登陆</a></li>
+					  {% endif %}
+				  </ul>
+				</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock %}

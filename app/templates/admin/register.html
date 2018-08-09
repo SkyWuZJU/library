@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}图书管理系统{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+	<h2>The local date is {{ moment(current_time).format('LLL') }}.</h2>
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}

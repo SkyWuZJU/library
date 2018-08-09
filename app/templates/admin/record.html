@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block page_content %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>书本编号</th>
+                <th>借书证号</th>
+                <th>借阅时间</th>
+                <th>归还时间</th>
+                <th>经手管理员</th>
+                <th>是否已还</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for foo in record %}
+                <tr>
+                    <th>{{ foo.bno }}</th>
+                    <th>{{ foo.cno }}</th>
+                    <th>{{ foo.btime }}</th>
+                    <th>{{ foo.rtime }}</th>
+                    <th>{{ foo.username }}</th>
+                    <th>{{ foo.backornot }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
